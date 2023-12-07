@@ -25,14 +25,16 @@ services:
   frontend:
     env_file: .env
     image: waynje/kittygram_frontend
-    command: cp -r /app/build/. /static/
+    command: cp -r /app/build/. /frontend_static/
     volumes:
-      - static_kittygram:/static
+      - static_kittygram:/frontend_static
+  
   gateway:
-    build: waynje/kittygram_gateway
+    image: waynje/kittygram_gateway
     env_file: .env
+    volumes:
+      - static_kittygram:/static/
+      - media_kittygram:/media
     ports:
       - 9000:80
-    volumes:
-      - static_kittygram:/static
-      - media_kittygram:/media
+    
