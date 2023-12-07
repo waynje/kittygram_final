@@ -14,7 +14,7 @@ services:
       - pg_data_kittygram:/var/lib/postgresql/data
   
   backend:
-    build: ./backend/
+    image: waynje/kittygram_backend
     env_file: .env
     volumes:
       - static_kittygram:/backend_static
@@ -24,15 +24,15 @@ services:
   
   frontend:
     env_file: .env
-    build: ./frontend/
+    image: waynje/kittygram_frontend
     command: cp -r /app/build/. /static/
     volumes:
       - static_kittygram:/static
   gateway:
-    build: ./nginx/
+    build: waynje/kittygram_gateway
     env_file: .env
     ports:
-      - 8080:80
+      - 9000:80
     volumes:
       - static_kittygram:/static
       - media_kittygram:/media
