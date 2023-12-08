@@ -32,9 +32,8 @@ services:
   gateway:
     image: waynje/kittygram_gateway
     env_file: .env
+    ports:
+      - 9000:80
     volumes:
       - static_kittygram:/static/
       - media_kittygram:/media
-    ports:
-      - 9000:80
-    
