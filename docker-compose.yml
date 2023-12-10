@@ -28,6 +28,7 @@ services:
     command: cp -r /app/build/. /static/
     volumes:
       - static_kittygram:/static
+  
   gateway:
     build: ./nginx/
     env_file: .env
